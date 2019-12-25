@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/aop
+       http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+
+    <mvc:annotation-driven>
+        <mvc:message-converters>
+            <ref bean="stringHttpMessageConverter" />
+        </mvc:message-converters>
+    </mvc:annotation-driven>
+
+    <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter">
+        <constructor-arg value="UTF-8" index="0"></constructor-arg><!--避免出现乱码 -->
+        <property name="supportedMediaTypes">
+            <list><value>application/xml;charset=UTF-8</value></list>
+        </property>
+    </bean>
+
+    <context:component-scan base-package="example.main.java.cn.wxController"/>
+</beans>
